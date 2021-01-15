@@ -1,6 +1,7 @@
-package jpa.kanban;
+package fr.istic.sir.jpa.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,13 +13,29 @@ public class Fiche {
     private Date dateButoire;
     private Utilisateur utilisateur;
     private int temps;
-    private List <Tag> tag;
+    private List <Tag> tags  = new ArrayList<>();
     private String lieu;
     private String url;
     private String note;
+    private Section section ;
+
+    public Fiche() {}
+
+    public Fiche(String libelle, Date dateButoire, Utilisateur utilisateur, int temps, String lieu, String url, String note) {
+        this.libelle = libelle;
+        this.dateButoire = dateButoire;
+        this.utilisateur = utilisateur;
+        this.temps = temps;
+        this.lieu = lieu;
+        this.url = url;
+        this.note = note;
+    }
+
+
+
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -60,13 +77,24 @@ public class Fiche {
         this.temps = temps;
     }
 
-    @ManyToMany(mappedBy = "fiche")
+    @ManyToMany(mappedBy = "fiches")
     public List<Tag> getTag() {
-        return tag;
+        return tags;
+    }
+
+    public void addTag(Tag tag){
+        this.tags.add(tag) ;
+    }
+
+    public void removeTag(Tag tag){
+
+        if( this.tags.contains(tag)) {
+            this.tags.remove(tag);
+        }
     }
 
     public void setTag(List<Tag> tag) {
-        this.tag = tag;
+        this.tags = tag;
     }
 
     public String getLieu() {
@@ -91,6 +119,15 @@ public class Fiche {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @ManyToOne
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
     }
 
 

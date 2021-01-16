@@ -15,7 +15,7 @@ public class Section {
     private List<Fiche> fiches ;
     private Tableau tab;
 
-    public Section() {
+    protected Section() {
         this.libelle = libelle;
     }
 

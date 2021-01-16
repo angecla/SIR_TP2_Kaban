@@ -19,7 +19,7 @@ public class Fiche {
     private String note;
     private Section section ;
 
-    public Fiche() {}
+    protected Fiche() {}
 
     public Fiche(String libelle, Date dateButoire, Utilisateur utilisateur, int temps, String lieu, String url, String note) {
         this.libelle = libelle;

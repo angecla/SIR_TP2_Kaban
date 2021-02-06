@@ -15,11 +15,6 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 		this.entityManager = EntityManagerHelper.getEntityManager();
 	}
 
-	public void setClazz(Class<T> clazzToSet) {
-		this.clazz = clazzToSet;
-	}
-
-
 
 	/**
 	 * Enregistre l'objet pour la première fois dans la base de données.
@@ -63,8 +58,6 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 	}
 
 	public List<T> findAll() {
-
-		System.out.println("Class : "+clazz.getName());
 		return entityManager.createQuery("select e from " + clazz.getName() + " as e",clazz).getResultList();
 	}
 

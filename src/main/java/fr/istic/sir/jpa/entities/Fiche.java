@@ -1,12 +1,13 @@
 package fr.istic.sir.jpa.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Fiche {
+public class Fiche implements Serializable {
 
     private long id;
     private String libelle;
@@ -78,8 +79,11 @@ public class Fiche {
     }
 
     @ManyToMany(mappedBy = "fiches")
-    public List<Tag> getTag() {
+    public List<Tag> getTags() {
         return tags;
+    }
+    public void setTags(List<Tag> tag) {
+        this.tags = tag;
     }
 
     public void addTag(Tag tag){
@@ -93,9 +97,7 @@ public class Fiche {
         }
     }
 
-    public void setTag(List<Tag> tag) {
-        this.tags = tag;
-    }
+
 
     public String getLieu() {
         return lieu;
